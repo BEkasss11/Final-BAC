@@ -1,0 +1,48 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Создать продукт{% endblock %}
+
+{% block content %}
+    <div class="wrapper">
+        <div class="create_product_container">
+            <form method="POST" class="form_for_create_product" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="cover_image">
+                    <p>Фото продукта <span>*</span></p>
+                    <input class="form-control" type="file" name="cover_image">
+                </label>
+
+                <label for="title">
+                    <p>Название продукта <span>*</span></p>
+                    <input class="form-control" type="text" name="title">
+                </label>
+
+                <label for="model">
+                    <p>Модель продукта (уникальный ID) <span>*</span></p>
+                    <input class="form-control" type="text" name="model">
+                </label>
+
+                <label for="price">
+                    <p>Стоимость продукта (₸) <span>*</span></p>
+                    <input class="form-control" type="number" name="price">
+                </label>
+
+                <label for="country">
+                    <p>Headings <span>*</span></p>
+                    <input class="form-control" type="text" name="country">
+                </label>
+
+                <label for="manufacturer">
+                    <p>Производитель <span>*</span></p>
+                    <input class="form-control" type="text" name="manufacturer">
+                </label>
+
+                <label for="description">
+                    <p>Описание продукта <span>*</span></p>
+                    <textarea class="form-control" name="description" cols="50" rows="10"></textarea>
+                </label>
+                <button type="submit">СОЗДАТЬ</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

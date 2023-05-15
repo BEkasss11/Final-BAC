@@ -1,0 +1,47 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Админ панель{% endblock %}
+
+{% block content %}
+    <div class="wrapper">
+        <div class="admin_panel_container">
+            <div class="popular_goods_block">
+                <div class="title_popular_goods" style="display:flex;">
+                    <h1>Товары</h1>
+                    <a href="{% url 'create' %}" class="create_good_block" style="margin-left:5px;">
+                        Создать
+                    </a>
+                </div>
+                <ul class="list_popular_goods">
+                    {% for product in products %}
+                        <li class="list_goods">
+                            <div class="image_background_list_goods">
+                                {% if product.cover_image %}
+                                    <div class="image_block_list_goods" style="background-image: url('{{ product.cover_image.url }}')"></div>
+                                {% endif %}
+                                {% if not product.is_visible %}
+                                    <div class="visible_checkbox_block">
+                                        <h1>В обработке</h1>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="title_block_list_goods">
+                                <a href="{% url 'product-detail' product.id %}">{{ product.title }}</a>
+                                <p>{{ product.price }} <span>₸</span></p>
+                                <div style="display:flex; align-items: center;">
+                                    <a href="{% url 'update' product.id %}" class="update_basket_list"><h1>Обновить</h1></a>
+                                    <form method="POST" action="{% url 'delete' product.id %}">
+                                        {% csrf_token %}
+                                        <button class="delete_basket_list" type="submit" name="product_id" value="{{ product.id }}">
+                                            <h1>Удалить</h1>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

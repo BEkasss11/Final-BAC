@@ -1,0 +1,39 @@
+{% extends 'main/base.html' %}
+
+{% block title %}{{ user.username }} - Личный кабинет.{% endblock %}
+
+{% block content %}
+    <div class="wrapper">
+        <div class="section_container">
+            <div class="account_overview_block">
+                <div class="title_account_overview_block">
+               <h1 style="font-size: 20px; color: #073294;">Account</h1></div>
+                </div>
+                <div class="profile_details_account_overview_block">
+                    <div class="title_block_profile_details">
+                        <h1 style="font-size: 20px; color: #073294;">Profile Details</h1>
+                        <a href="{% url 'edit-profile' %}">Edit profile</a>
+                    </div>
+                    <ul class="main_info_block_profile_details">
+                        <li>
+                            <p style="font-size: 15px; color: #073294">First name</p>
+                            <span>{{ user.first_name }}</span>
+                        </li>
+                        <li>
+                            <p style="font-size: 15px; color: #073294">Last name</p>
+                            <span>{{ user.last_name }}</span>
+                        </li>
+                        <li>
+                            <p style="font-size: 15px; color: #073294">Email</p>
+                            <span>{{ user.email }}</span>
+                        </li>
+                        <li>
+                            <p style="font-size: 15px; color: #073294">Username</p>
+                            <span>{{ user.username }}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

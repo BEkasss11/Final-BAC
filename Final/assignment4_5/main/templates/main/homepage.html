@@ -1,0 +1,189 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Интернет-дүкен. Жеткізу (24/7). Online marketplace{% endblock %}
+
+{% block content %}
+    <div class="wrapper">
+        <div class="main_container">
+            <div class="popular_goods_block">
+
+                <form class="title_popular_goods" style="display: flex">
+
+
+                    <div style="padding:20px">
+                        <h1 style="padding-bottom:15px; color: #3827a8 ; font-size: 40px; font-family: seriv; " ><b>Категориялар : </b></h1>
+                        <div for="country">
+                            <label  class="form-check">
+                            <input class="form-check-input country_select_items" type="checkbox" name="country" value="Велосипед" id="Велосипед">
+                            <span>Велосипед</span>
+                            </label>
+                            <label  class="form-check">
+                                <input class="form-check-input country_select_items" type="checkbox" name="country" value="Жануар" id="Жануар">
+                                <span>Жануар</span>
+                            </label>
+                            <label  class="form-check">
+                                <input class="form-check-input country_select_items" type="checkbox" name="country" value="Көлік" id="Көлік">
+                                <span>Көлік</span>
+                            </label>
+                            <label  class="form-check">
+                                <input class="form-check-input country_select_items" type="checkbox" name="country" value="Сән және Стиль" id="Стиль">
+                                <span>Сән және Стиль</span>
+                            </label>
+                            <label  class="form-check">
+                                <input class="form-check-input country_select_items" type="checkbox" name="country" value="Қызмет" id="Қызмет">
+                                <span>Қызмет</span>
+                            </label>
+                            <label  class="form-check">
+                                <input class="form-check-input country_select_items" type="checkbox" name="country" value="Жылжымайтын мүлік" id="Жылжымайтын">
+                                <span>Жылжымайтын мүлік</span>
+                            </label>
+                            <label class="form-check">
+                                <input class="form-check-input country_select_items" type="checkbox" name="country" value="Электроника" id="Электроника">
+                                <span>Электроника</span>
+                            </label>
+                            <label  class="form-check">
+                                <input class="form-check-input country_select_items" type="checkbox" name="country" value="Тұрмыстық заттар" id="Тұрмыстық">
+                                <span>Тұрмыстық заттар</span>
+                            </label>
+                            <label  class="form-check">
+                                <input class="form-check-input country_select_items" type="checkbox" name="country" value="Спорттық заттар" id="Спорттық">
+                                <span>Спорттық заттар</span>
+                            </label>
+                            <label  class="form-check">
+                                <input class="form-check-input country_select_items" type="checkbox" name="country" value="Балалар әлемі" id="Балалар">
+                                <span>Балалар әлемі</span>
+                            </label>
+                        </div>
+
+
+                        <button style="background-color: #184160;" class="create_good_blockk" type="submit">Іздеу</button>
+
+
+                        <div class="dobav">
+                            <label for="is_visible" class="selected_container_block" >
+                                <select class="form-control visible_select_items" name="is_visible" id="is_visible">
+                                    <option value="True" selected>Қосылды</option>
+                                    <option value="False">Өңделуде</option>
+                                </select>
+                            </label>
+                        </div>
+
+                        <a href="{% url 'create' %}" class="create_good_block">Создать</a>
+                    </div>
+
+
+
+
+
+
+
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" >
+                        <div class="carousel-inner" style="width: 800px;height: 450px;margin-left:80px">
+                            <div class="carousel-item active" >
+                                <img class="d-block wg-100" style="search_button_blockwidth: 800px;height: 450px" src="https://i.kinja-img.com/gawker-media/image/upload/c_fit,f_auto,g_center,q_60,w_1315/vmhdwh8ran566oqnvlss.jpg"  alt="First slide" >
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block w-100" style="width: 800px;height: 450px" src="https://i.kinja-img.com/gawker-media/image/upload/c_fit,f_auto,g_center,q_60,w_1315/bkivg8hffuclhdym3pij.jpg"  alt="Second slide">
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block w-100" style="width: 800px;height: 450px" src="https://www.macworld.com/wp-content/uploads/2023/01/identificar-modelo-iphone.jpg?quality=50&strip=all&w=1024"    alt="Third slide">
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+                {% if searched %}
+                    {% if venues %}
+                        <ul class="list_popular_goods">
+                            {% for product in venues %}
+                                {% if product.is_visible %}
+                                    <li class="list_goods">
+                                        <div class="image_background_list_goods">
+                                            {% if product.cover_image %}
+                                                <div class="image_block_list_goods" style="background-image: url('{{ product.cover_image.url }}')"></div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="title_block_list_goods">
+                                            <a href="{% url 'product-detail' product.id %}">{{ product.title }}</a>
+                                            <p>{{ product.price }} <span>₸</span></p>
+                                            <div class="add_basket_list_goods">
+                                               	<a href="{% url 'add_to_cart' %}"><h1>Себетке қосу</h1></a> 
+                                            </div>
+																						
+                                        </div>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <h1>No results for search: {{ searched }}!</h1>
+                    {% endif %}
+                {% endif %}
+
+                <ul class="list_popular_goods">
+                    {% for product in products %}
+                        <li class="list_goods" style="height: 250px">
+                            <div class="image_background_list_goods">
+                                {% if product.cover_image %}
+                                    <div class="image_block_list_goods" style="background-image: url('{{ product.cover_image.url }}')"></div>
+                                {% endif %}
+                                {% if not product.is_visible %}
+                                    <div class="visible_checkbox_block">
+                                        <h1>Өңдеуде</h1>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="title_block_list_goods" >
+                                <a href="{% url 'product-detail' product.id %}">{{ product.title }}</a>
+                                <p>{{ product.price }} <span>₸</span></p>
+                                <div class="add_basket_list_goods">
+                                    <a href="{% url 'product-detail' product.id %}"><h1>  Сипаттамасы</h1></a>
+                                </div>
+
+                                <form method="post" action="{% url 'add_to_cart' product.id %}">
+                                    {% csrf_token %}
+								<button type="submit" class="add" id="add_basket_list_goods">Себетке қосу</button>
+								</form>
+
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <div class="hr" style="margin-top: 50px;"></div>
+
+                <h1 style="color: black; font-size:20px;">Қаралған өнімдердің тарихы</h1>
+
+                <ul class="list_popular_goods">
+                    {% for product in viewed_products %}
+                        <li class="list_goods">
+                            <div class="image_background_list_goods">
+                                {% if product.product.cover_image %}
+                                    <div class="image_block_list_goods" style="background-image: url('{{ product.product.cover_image.url }}')"></div>
+                                {% endif %}
+                                {% if not product.product.is_visible %}
+                                    <div class="visible_checkbox_block">
+                                        <h1>В обработке</h1>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="title_block_list_goods">
+                                <a href="{% url 'product-detail' product.product.id %}">{{ product.product.title }}</a>
+                                <p>{{ product.product.price }} <span>₸</span></p>
+                                <div class="add_basket_list_goods">
+                                    <h1>Себетке қосу</h1>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+        </div>
+    </div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+{% endblock %}

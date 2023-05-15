@@ -1,0 +1,54 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Обновить продукт - {{ product.title }}{% endblock %}
+
+{% block content %}
+    <div class="wrapper">
+        <div class="create_product_container">
+            <form method="POST" class="form_for_create_product" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="cover_image">
+                    <p>Фото продукта <span>*</span></p>
+                    <input class="form-control" type="file" name="cover_image" value="{{ product.cover_image }}">
+                </label>
+
+                <label for="title">
+                    <p>Название продукта <span>*</span></p>
+                    <input class="form-control" type="text" name="title" value="{{ product.title }}">
+                </label>
+
+                <label for="model">
+                    <p>Модель продукта (уникальный ID) <span>*</span></p>
+                    <input class="form-control" type="text" name="model" value="{{ product.model }}">
+                </label>
+
+                <label for="price">
+                    <p>Стоимость продукта (₸) <span>*</span></p>
+                    <input class="form-control" type="number" name="price" value="{{ product.price }}">
+                </label>
+
+                <label for="country">
+                    <p>Headings <span>*</span></p>
+                    <input class="form-control" type="text" name="country" value="{{ product.country }}">
+                </label>
+
+                <label for="manufacturer">
+                    <p>Производитель <span>*</span></p>
+                    <input class="form-control" type="text" name="manufacturer" value="{{ product.manufacturer }}">
+                </label>
+
+                <label for="description">
+                    <p>Описание продукта <span>*</span></p>
+                    <textarea class="form-control" name="description" cols="60" rows="10">{{ product.description }}</textarea>
+                </label>
+
+                <label for="is_visible" class="checkbox_is_visible">
+                    <p>Is visible?</p>
+                    <input type="checkbox" name="is_visible" {% if product.is_visible %}checked{% endif %}>
+                </label>
+                
+                <button type="submit">Обновить</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

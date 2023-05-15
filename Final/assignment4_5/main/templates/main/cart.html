@@ -1,0 +1,37 @@
+<h2>Cart</h2>
+<ul>
+  {% for cart_item in cart.cart_items.all %}
+  <li>
+    {{ cart_item.product }} - Quantity: {{ cart_item.quantity }} - Price:
+    {{ cart_item.product.price }}
+    <a href="{% url 'remove_from_cart' cart_item.product.id %}">Remove</a>
+  </li>
+  {% empty %}
+  <li>No items in the cart.</li>
+  {% endfor %}
+</ul>
+<p>Total Price: {{ cart.get_total_price }}</p>
+{% block styles %}
+<style type="text/css">
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  li {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  li a {
+    color: #ff0000;
+    text-decoration: none;
+    margin-left: 10px;
+  }
+  li a:hover {
+    text-decoration: underline;
+  }
+  p {
+    font-weight: bold;
+  }
+</style>
+{% endblock %}

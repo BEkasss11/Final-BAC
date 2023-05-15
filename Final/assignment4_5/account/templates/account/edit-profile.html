@@ -1,0 +1,55 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Edit profile{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+        <div class="section_container">
+            <div class="account_overview_block">
+                <div class="title_account_overview_block">
+                     <h1 style="font-size: 20px; color: #073294;">Account</h1></div>
+                </div>
+                <div class="profile_details_account_overview_block">
+                    <div class="title_block_profile_details">
+                        <h1 style="font-size: 20px; color: #073294;">Profile Details</h1>
+                    </div>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <ul class="main_info_block_profile_details">
+                            <li>
+                                <p style="font-size: 15px; color: #073294">First name</p>
+                                <label>
+                                    <input type="text" name="first_name" value="{{ user.first_name }}" />
+                                </label>
+                            </li>
+                            <li>
+                                <p style="font-size: 15px; color: #073294">Last name</p>
+                                <label>
+                                    <input type="text" name="last_name" value="{{ user.last_name }}" />
+                                </label>
+                            </li>
+                            <li>
+                                <p style="font-size: 15px; color: #073294">Email</p>
+                                <label>
+                                    <input type="email" name="email" value="{{ user.email }}" />
+                                </label>
+                            </li>
+                            <li>
+                                <p style="font-size: 15px; color: #073294">Username</p>
+                                <label>
+                                    <input type="text" name="username" value="{{ user.username }}" disabled />
+                                </label>
+                            </li>
+                            <li class="changes_edit_profile">
+                                <a href="{% url 'home-page' %}">Discard</a>
+                                <button type="submit">Save changes</button>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

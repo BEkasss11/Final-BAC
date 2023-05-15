@@ -1,0 +1,39 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Вход в личный кабинет{% endblock %}
+
+{% block content %}
+    <div class="authorization_container" style="padding-top: 70px;">
+        <div class="main_auth_block_container">
+            <div class="title_auth_container">
+                <h1>Вход в Личный кабинет</h1>
+            </div>
+            <form method="POST">
+                {% csrf_token %}
+                <label for="username">
+                    <p>Имя пользователя <span>*</span></p>
+                    <input type="text" name="username">
+                </label>
+                <label for="password">
+                    <p>Пароль <span>*</span></p>
+                    <input type="password" name="password">
+                </label>
+                <button type="submit">Войти</button>
+
+                <div class="error_message">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+
+                <div class="additionally_services_auth_block">
+                    <a href="{% url 'register' %}">Зарегистрироваться</a>
+                    <p>/</p>
+                    <a href="">Забыли пароль?</a>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+{% endblock %}
